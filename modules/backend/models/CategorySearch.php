@@ -19,7 +19,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['type'], 'required'],
+            [['type','name'], 'required'],
             [['id', 'pid', 'type'], 'integer'],
             [['name', 'created_at', 'updated_at'], 'safe'],
         ];
@@ -78,6 +78,7 @@ class CategorySearch extends Category
             'query' =>$query
         ]);
         $this->load($params);
+        //var_dump($this);die;
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');

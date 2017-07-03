@@ -36,6 +36,11 @@ class EditPasswordForm extends Model
         ];
     }
 
+    public static function tableName()
+    {
+        //return 'admin_user';
+    }
+
     /**
      * Validates the password.
      * This method serves as the inline validation for password.

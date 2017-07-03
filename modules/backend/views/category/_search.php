@@ -17,9 +17,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'name') ?>
 
+    <? echo $form->field($model, 'pid')->passwordInput() ?>
     <?= $form->field($model, 'pid') ?>
+    <?= $form->field($model, 'name[]')->checkboxList(['a' => 'Item A', 'b' => 'Item B', 'c' => 'Item C']);?>
 
     <?= $form->field($model, 'type') ?>
 

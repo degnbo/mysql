@@ -2,6 +2,7 @@
 
 namespace app\modules\backend\models;
 
+use app\models\Category;
 use Yii;
 use yii\base\Model;
 
@@ -58,7 +59,10 @@ class LoginForm extends Model
      */
     public function login()
     {
+        //var_dump(Category::findOne(1));die;
+        //var_dump(Yii::$app->user);die;
         if ($this->validate()) {
+            //有效日期为30天
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
@@ -73,6 +77,7 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = AdminUserIdentity::findByUsername($this->username);
+            var_dump($this->_user);die;
         }
         return $this->_user;
     }

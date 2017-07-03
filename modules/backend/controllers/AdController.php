@@ -8,7 +8,6 @@ use app\modules\backend\models\AdSearch;
 use app\modules\backend\components\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 /**
  * AdController implements the CRUD actions for Ad model.
  */

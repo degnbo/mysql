@@ -48,10 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= ListView::widget([
                         'dataProvider' => $dataProvider,
                         'layout' => "<div class='panel-body'>{items}</div>\n<div class='panel-body'>{pager}</div>",
-                        'itemView'=>'_item'
+                        'itemView'=>'_item',
+                        //'data'=>\app\widgets\LastNews::widget(['options'=>
                     ]); ?>
                 </div>
             </div>
+            <script>
+            </script>
             <div class="col-lg-3">
                 <?=\app\widgets\Category::widget(['type'=>\app\models\Content::TYPE_PRODUCTS,
                     'options'=>['class'=>'panel panel-default panel-'.\yii\helpers\ArrayHelper::getValue($this->params,'themeColor')]

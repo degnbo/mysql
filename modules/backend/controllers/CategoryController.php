@@ -1,6 +1,8 @@
 <?php
 
 namespace app\modules\backend\controllers;
+//ison库用于处理json数据的
+use yii\helpers\Json;
 
 use app\models\Content;
 use Yii;
@@ -20,6 +22,7 @@ class CategoryController extends BackendController
      */
     public function behaviors()
     {
+        header("Content-type:text/html;charset=utf-8");
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -37,12 +40,36 @@ class CategoryController extends BackendController
      */
     public function actionIndex($type)
     {
+
+        //render():渲染布局
+        //renderPartial():渲染一个 视图名 并且不使用布局。
+        //Yii::$app->request->isGet;
+        //Yii::$app->request->isPost;
+        //Yii::$app->request->isAjax 是否是ajax请求
+        //Yii::$app->request->queryParams：得到的是数组，
+        //与Yii::$app->request->get()相等
+        //Yii::$app->request->bodyParams：得到的是数组，
+        //与Yii::$app->request->post()相等
+        //echo 1;die;
+        //echo Yii::$app->request->get('type','34');die;//第二个参数表示默认值
         $searchModel = new CategorySearch();
-        $params = Yii::$app->request->queryParams;
+
+        //$result=$searchModel->find()->indexBy('name')->asArray()->all();
+        //var_dump($result);die;
+
+
+        $params = Yii::$app->request->queryParams;//get请求
+        //var_dump(Yii::$app->request);die;
+        //echo $searchModel->formName();
+        //
+
         $params[$searchModel->formName()]['type'] = $type;
+        //print_r($params);die;
+
 
         $dataProvider = $searchModel->search($params);
-
+        //print_r($dataProvider);die;
+        //var_dump($searchModel);die;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -136,5 +163,30 @@ class CategoryController extends BackendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    public function actionMyform(){
+        $searchModel = new CategorySearch();
+        //$this->renderPartial()不使用模板布局
+        //$this->render()使用模板布局
+        //$list=Category::find()->one();
+        //$list=Category::find()->all();
+        //$list=Category::find()->select(['name','id'])->indexBy('id')->column();
+        //$list=Category::find()->indexBy('id')->column();
+        //var_dump($list);die;
+        //echo Yii::$app->db->createCommand()->getRawSql();die;
+        $list=Category::findOne(5);
+
+        //echo Category::find()->createCommand()->getRawSql();die;
+        //echo Json::encode($list);
+        //var_dump($list);die;
+        //$list=Category::findOne(5)->toArray();
+        //var_dump($searchModel);die;
+        return $this->render('myform',[
+            'model'=>$searchModel,
+            'list'=>$list
+        ]);
+    }
+    public function actionMydata(){
+        var_dump(Yii::$app->request->post());
     }
 }

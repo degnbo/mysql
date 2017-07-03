@@ -4,6 +4,31 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=yiicms',
     'username' => 'root',
-    'password' => '123456',
+    'password' => '',
     'charset' => 'utf8',
+    //'tablePrefix' => 'beidou_',//表前缀
+
+    /*// 主库的配置
+        'dsn' => 'dsn for master server',
+        'username' => 'master',
+        'password' => '',
+
+        // 从库的通用配置
+        'slaveConfig' => [
+            'username' => 'slave',
+            'password' => '',
+            'attributes' => [
+                // 使用一个更小的连接超时
+                PDO::ATTR_TIMEOUT => 10,
+            ],
+        ],
+
+        // 从库的配置列表
+        'slaves' => [
+            ['dsn' => 'dsn for slave server 1'],
+            ['dsn' => 'dsn for slave server 2'],
+            ['dsn' => 'dsn for slave server 3'],
+            ['dsn' => 'dsn for slave server 4'],
+        ],
+        */
 ];

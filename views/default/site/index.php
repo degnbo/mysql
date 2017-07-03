@@ -42,7 +42,7 @@ $carouselItems = [];
                 <div class="panel-heading"><h3 class="panel-title">产品展示</h3></div>
             </div>
             <div class="row">
-                <?php if (!empty($products)):foreach ($products as $model): ?>
+                <?php if (!empty($products)):foreach ($products as $k=>$model): ?>
                     <div class="col-md-4">
                         <div class="thumbnail">
                             <div class="image-box">
@@ -52,9 +52,9 @@ $carouselItems = [];
                             </div>
                             <div class="caption">
                                 <h5>
-                                    <a href="<?= Url::to(['/products/item', 'id' => $model->id]) ?>"
-                                       title="<?= $model->title ?>">
-                                        <?= StringHelper::truncateUtf8String($model->title, 13, false) ?>
+                                    <a href="<?= Url::to(['/products/item', 'id' => $model->id]).'se' ?>"
+                                       title="<?echo $model->title ?>">
+                                        <?= StringHelper::truncateUtf8String($model->title, 13, false).$k ?>
                                     </a>
                                 </h5>
                                 <div style="height: 40px;overflow: hidden;">
@@ -66,6 +66,7 @@ $carouselItems = [];
                 <?php endforeach;endif; ?>
             </div>
         </div>
+
         <div class="col-lg-3">
             <?= \app\widgets\Category::widget(['type' => \app\models\Content::TYPE_PRODUCTS,
                 'options' => ['class' => 'panel panel-default panel-' . \yii\helpers\ArrayHelper::getValue($this->params, 'themeColor')]

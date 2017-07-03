@@ -821,11 +821,9 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
         $scope = $formName === null ? $this->formName() : $formName;
         if ($scope === '' && !empty($data)) {
             $this->setAttributes($data);
-
             return true;
         } elseif (isset($data[$scope])) {
             $this->setAttributes($data[$scope]);
-
             return true;
         }
         return false;

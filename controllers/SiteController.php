@@ -39,7 +39,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        header("Content-type: text/html; charset=utf-8");
+        //asarray()由对象转化为数组
+        //where(['status'=>Products::STATUS_ENABLE])->
         $products = Products::find()->where(['status'=>Products::STATUS_ENABLE])->orderBy('id desc')->limit(12)->all();
+        //echo Products::find()->createCommand()->getSql();
+        /*foreach($products as $k=>$v){
+            echo $v->title.'<br>';
+        }
+        die;*/
+        //var_dump($products);die;
         $aboutUs = Config::find()->where(['name'=>'about_us'])->one();
         return $this->render('index', [
             'aboutUs'=>$aboutUs,

@@ -32,7 +32,7 @@ $fieldOptions2 = [
     <div class="login-box-body">
 
         <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
+            'id' => 'login-form1',
             'enableClientValidation' => false,
         ]); ?>
 
@@ -53,7 +53,7 @@ $fieldOptions2 = [
         <?php ActiveForm::end(); ?>
 
         <div class="social-auth-links">
-            You may login with <strong>demo/demo</strong>.<br>
+            You may login with <strong>admin/admin123</strong>.<br>
         </div>
     </div>
 </div>

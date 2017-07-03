@@ -301,6 +301,7 @@ class Content extends AppActiveRecord
     public static function find()
     {
         ContentQuery::$type = static::$currentType;
+
         return Yii::createObject(ContentQuery::className(), [get_called_class()]);
     }
 }

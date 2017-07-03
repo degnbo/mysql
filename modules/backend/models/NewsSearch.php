@@ -66,7 +66,7 @@ class NewsSearch extends News
             'sort'=>['defaultOrder'=>['id'=>SORT_DESC]],
             'pagination' => ['pageSize'=>$pageSize]
         ]);
-
+        //var_dump($params);die;
         $this->load($params);
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

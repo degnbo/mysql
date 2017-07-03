@@ -34,8 +34,11 @@ class LastNews extends Panel
             ->orderBy('id desc')
             ->all();
         $html = Html::beginTag('ul', ['class'=>'list-group']);
-        foreach($newsList as $item) {
+        foreach($newsList as $key=>$item) {
+            //echo $key;var_dump($item->title);die;
+            //echo $item['title'].'1';die;
             $url = Url::to([ArrayHelper::remove($this->itemOptions,'baseUrl', '/news/item'), 'id'=>$item['id']]);
+            //var_dump($this->itemOptions);die;
             $html .= Html::beginTag('li', $this->itemOptions);
             $html .='<a href="'.$url.'">'.$item['title'].'</a>';
             if($this->showDate){

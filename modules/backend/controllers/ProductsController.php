@@ -21,6 +21,7 @@ class ProductsController extends BackendController
 {
     /**
      * @inheritdoc
+     * 用于配置控制权限的
      */
     public function behaviors()
     {
@@ -50,6 +51,10 @@ class ProductsController extends BackendController
             'delete-all'=>[
                 'class'=>ContentDeleteAllAction::className(),
                 'type'=>Products::$currentType,
+            ],
+            'dd'=>[
+                'class'=>ContentDeleteAllAction::className(),
+                //'type'=>Products::$currentType,
             ]
         ]);
     }

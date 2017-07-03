@@ -57,6 +57,7 @@ class NewsController extends BackendController
      */
     public function actionIndex()
     {
+        //echo Yii::$app->request->get('sort','34');die;
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->module->params['pageSize']);
 
