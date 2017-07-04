@@ -83,6 +83,8 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
+        //在当前类中调用自身的静态方法，和属性用self::方法和属性，
+        //在子类中调用父类中的静态方法用static::方法和属性
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 

@@ -16,6 +16,7 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
+    public $name;
     public $rememberMe = true;
     /** @var bool AdminUserIdentity */
     private $_user = false;
@@ -28,8 +29,10 @@ class LoginForm extends Model
         return [
             // username and password are both required
             [['username', 'password'], 'required'],
+            //['username','string','min'=>3,'max'=>9],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
+            [['username','password','name','rememberMe'],'safe'],//起一个过滤作用
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -45,10 +48,13 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
+
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+
+                $this->addError($attribute, '用户名或密码错误！');
+
             }
         }
     }
@@ -59,8 +65,19 @@ class LoginForm extends Model
      */
     public function login()
     {
+        header('Content-type:text/html;charset=utf-8');
         //var_dump(Category::findOne(1));die;
         //var_dump(Yii::$app->user);die;
+        //$this->setAttributes('username','fsf');
+        //echo $this->name;die;
+        //echo Yii::$app->request->post('name');
+        //var_dump(Yii::$app->request->post());
+        //$this->name=Yii::$app->request->post('LoginForm')['name'];
+
+        //var_dump($this);die;
+
+        //var_dump(Yii::$app->request->post());die;
+
         if ($this->validate()) {
             //有效日期为30天
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
@@ -77,7 +94,9 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = AdminUserIdentity::findByUsername($this->username);
-            var_dump($this->_user);die;
+            //var_dump(PhotosSearch::find()->one());die;//同一个模块下的模型调用不需要引用
+            //var_dump(CategorySearch::find()->one());die;
+            //var_dump($this->_user);die;
         }
         return $this->_user;
     }

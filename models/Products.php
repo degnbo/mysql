@@ -76,6 +76,7 @@ class Products extends Content
     }
     /**
      * @inheritdoc
+     * 用于设置字段的标签即别名
      */
     public function attributeLabels()
     {

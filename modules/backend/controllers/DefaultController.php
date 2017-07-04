@@ -18,6 +18,7 @@ class DefaultController extends BackendController
 {
     public function actions()
     {
+        header('Content-type:text/html;charset=utf-8');
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -32,6 +33,7 @@ class DefaultController extends BackendController
      */
     public function actionIndex()
     {
+        //echo 2;die;
         return $this->render('index');
     }
 
@@ -87,12 +89,19 @@ class DefaultController extends BackendController
         }else{
             echo 2;
         }*/
+
         $model = new LoginForm();
         //var_dump($model);die;
-        //echo $model->formName();调用表单名字
-        //echo $model->load(Yii::$app->request->post());die;
+        //$attributes = $model->attributes;
+        //var_dump($attributes);die;
+        //$data=Yii::$app->request->post();
+        //var_dump($data);//die;
+        //$model->setAttributes($data[$model->formName()]);
+        //var_dump($model);die;
+        //echo $model->formName();die;//调用表单名字
+        //echo );die;
+        //var_dump(Yii::$app->request->post());
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
             //echo 2;
             //return $this->redirect(['/backend/default/index']);
         }

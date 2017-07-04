@@ -819,6 +819,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     public function load($data, $formName = null)
     {
         $scope = $formName === null ? $this->formName() : $formName;
+        //echo $this->formName();
         if ($scope === '' && !empty($data)) {
             $this->setAttributes($data);
             return true;

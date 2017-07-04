@@ -32,12 +32,13 @@ $fieldOptions2 = [
     <div class="login-box-body">
 
         <?php $form = ActiveForm::begin([
-            'id' => 'login-form1',
+            'id' => 'login-form',
+            //'action'=>['index'],
             'enableClientValidation' => false,
         ]); ?>
 
         <?= $form->field($model, 'username', $fieldOptions1)->label(false)->textInput(['autofocus' => true]) ?>
-
+        <?= $form->field($model, 'name', $fieldOptions1)->label(false)->textInput() ?>
         <?= $form->field($model, 'password', $fieldOptions2)->label(false)->passwordInput() ?>
 
         <div class="row">
