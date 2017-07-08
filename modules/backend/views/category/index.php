@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <li role="presentation"><?= Html::a('添加分类', ['create', 'type'=>$type,'name'=>'fsdf']) ?></li>
         </ul>
         <div class="tab-content">
-            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php ///echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <?= GridView::widget([
                 'layout'=>"{summary}\n{items}\n{pager}",

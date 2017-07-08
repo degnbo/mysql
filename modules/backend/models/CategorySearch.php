@@ -24,6 +24,10 @@ class CategorySearch extends Category
             [['name', 'created_at', 'updated_at'], 'safe'],
         ];
     }
+    public static function ta()
+    {
+        echo 2;
+    }
 
     /**
      * @inheritdoc
@@ -75,10 +79,13 @@ class CategorySearch extends Category
         $query = Category::find();
 
         $activeDataProvider =  new ActiveDataProvider([
-            'query' =>$query
+            'query' =>$query,
+            'pagination' => [
+                'pageSize' => 2,
+            ],
         ]);
         $this->load($params);
-        //var_dump($this);die;
+        //var_dump($activeDataProvider);die;
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -93,6 +100,7 @@ class CategorySearch extends Category
 
         $query->andFilterWhere(['like', 'name', $this->name]);
         $createAt = $this->getCreatedAt();
+        //var_dump($createAt);die;
         if(is_array($createAt)) {
             $query->andFilterWhere(['>=','created_at', $createAt[0]])
                 ->andFilterWhere(['<=','created_at', $createAt[1]]);

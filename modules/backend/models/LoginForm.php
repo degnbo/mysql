@@ -43,18 +43,15 @@ class LoginForm extends Model
      * This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param array $params the additional name-value pairs given in the rule name-value
      */
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-
             $user = $this->getUser();
-
+            //var_dump($user);die;
             if (!$user || !$user->validatePassword($this->password)) {
-
                 $this->addError($attribute, '用户名或密码错误！');
-
             }
         }
     }
@@ -75,8 +72,13 @@ class LoginForm extends Model
         //$this->name=Yii::$app->request->post('LoginForm')['name'];
 
         //var_dump($this);die;
-
+        //var_dump($this->getUser());die;
         //var_dump(Yii::$app->request->post());die;
+
+        //$model=CategorySearch::findOne(1);//可以返回作为当前模型来调用其他的东西
+
+        //$model=$model::ta();
+        //var_dump($model);die;
 
         if ($this->validate()) {
             //有效日期为30天
@@ -84,6 +86,7 @@ class LoginForm extends Model
         }
         return false;
     }
+
 
     /**
      * Finds user by [[username]]

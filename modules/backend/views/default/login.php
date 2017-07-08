@@ -38,7 +38,7 @@ $fieldOptions2 = [
         ]); ?>
 
         <?= $form->field($model, 'username', $fieldOptions1)->label(false)->textInput(['autofocus' => true]) ?>
-        <?= $form->field($model, 'name', $fieldOptions1)->label(false)->textInput() ?>
+        <?/*= $form->field($model, 'name', $fieldOptions1)->label(false)->textInput() */?>
         <?= $form->field($model, 'password', $fieldOptions2)->label(false)->passwordInput() ?>
 
         <div class="row">

@@ -33,6 +33,7 @@ class DefaultController extends BackendController
      */
     public function actionIndex()
     {
+        //var_dump(Yii::$app->user);die;
         //echo 2;die;
         return $this->render('index');
     }
@@ -101,9 +102,14 @@ class DefaultController extends BackendController
         //echo $model->formName();die;//调用表单名字
         //echo );die;
         //var_dump(Yii::$app->request->post());
+        //
+        //var_dump($model->attributes);die;
+        //var_dump(Yii::$app->user);die;
+        //Yii::warning("Division by zero.");
+        //$model->addError('name', '用户名或密码错误！');
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             //echo 2;
-            //return $this->redirect(['/backend/default/index']);
+            return $this->redirect(['/backend/default/index']);
         }
         //echo 3;
         return $this->render('login', [

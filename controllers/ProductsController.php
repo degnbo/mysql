@@ -94,6 +94,9 @@ class ProductsController extends Controller
         ]);die;*/
         //2.ActiveDataProvider
         $query = Products::find()->where(['status'=>Products::STATUS_ENABLE]);
+        //echo Products::className();die;
+        //$model=new Products();
+        //var_dump($model->toArray());die;
         //$query=$query=new Query();
         //$query=$query->from('admin_menu');
         $provider = new ActiveDataProvider([
@@ -105,9 +108,9 @@ class ProductsController extends Controller
                 'attributes' => ['id', 'description'],
             ],
         ]);
-        echo GridView::widget([
+        /*echo GridView::widget([
             'dataProvider' =>  $provider,
-        ]);die;
+        ]);die;*/
         /*echo ListView::widget([
             'dataProvider' => $provider,
             //'itemView' => 'list',
@@ -116,7 +119,10 @@ class ProductsController extends Controller
         //echo $count = $provider->getCount();
         //var_dump(json_decode(json_encode($provider),TRUE));die;
         $categoryId = Yii::$app->request->get('category-id');
+        //echo $query->type;
         //var_dump($categoryId);
+        //$model=new Products();
+        //echo $model->type;
         $query = Products::find()->where(['status'=>Products::STATUS_ENABLE]);
         //var_dump($query);die;
         //$count = $query->count();

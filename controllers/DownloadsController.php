@@ -56,6 +56,7 @@ class DownloadsController extends AppController
         }
 
         return $this->render('index',['model'=>$model]);
+
     }
     /**
      * Displays news page
