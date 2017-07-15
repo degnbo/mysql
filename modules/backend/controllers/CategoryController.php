@@ -179,7 +179,7 @@ class CategoryController extends BackendController
         //echo Category::find()->createCommand()->getRawSql();die;
         //echo Json::encode($list);
         //var_dump($list);die;
-        //$list=Category::findOne(5)->toArray();
+        $list=Category::findOne(5)->toArray();
         //var_dump($searchModel);die;
         return $this->render('myform',[
             'model'=>$searchModel,
