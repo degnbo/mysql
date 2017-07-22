@@ -142,7 +142,11 @@ class ProductsController extends Controller
         $pagesize=3;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=>['defaultOrder'=>['id'=>SORT_DESC]],
+            'sort'=>[
+                'defaultOrder'=>[
+                    'id'=>SORT_DESC
+                ]
+            ],
             'pagination' => ['pageSize'=>3]
         ]);
 

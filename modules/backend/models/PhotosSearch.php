@@ -54,7 +54,11 @@ class PhotosSearch extends Photos
             'sort'=>['defaultOrder'=>['id'=>SORT_DESC]],
             'pagination' => ['pageSize'=>$pageSize]
         ]);
-
+        //获取对应的每一页的id值以及纪录值$dataProvider->getKeys()
+        //var_dump($dataProvider->getKeys());die;
+        //获取每一页的数据纪录
+        //$sj = $dataProvider->getModels();
+        //var_dump($sj);die;
         $this->load($params);
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -70,12 +74,10 @@ class PhotosSearch extends Photos
             'hits' => $this->hits,
             'updated_at' => $this->updated_at,
         ]);
-
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description]);
         $createAt = $this->getCreatedAt();
         if(is_array($createAt)) {
-
             $query->andFilterWhere(['>=','created_at', $createAt[0]])
                 ->andFilterWhere(['<=','created_at', $createAt[1]]);
         }else{

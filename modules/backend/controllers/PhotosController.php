@@ -15,10 +15,22 @@ use app\models\PhotosDetail;
 use app\modules\backend\components\BackendController;
 use app\models\Photos;
 use app\modules\backend\models\PhotosSearch;
+use Faker\Provider\he_IL\PhoneNumber;
+use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use Yii;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+//详情的模型
+use yii\widgets\DetailView;
+//
+use yii\widgets\ListView;
+use yii\data\ActiveDataProvider;
+
+//
+use app\modules\backend\models\NewsSearch;
+
+
 
 class PhotosController extends BackendController
 {
@@ -40,6 +52,7 @@ class PhotosController extends BackendController
     }
     public function actions()
     {
+        header("Content-type:text/html;charset=utf-8");
         return array_merge(parent::actions(), [
             'check'=>[
                 'class'=>ContentCheckAction::className(),
@@ -57,6 +70,68 @@ class PhotosController extends BackendController
             ]
         ]);
     }
+    /*
+     * DetailView的使用
+     * */
+    public function actionCeshi(){
+        header("Content-type:text/html;charset=utf-8");
+        $searchModel = new PhotosSearch();
+        echo DetailView::widget([
+            'model' => PhotosSearch::findOne([31]),
+            'attributes' => [
+                'title',               // title attribute (in plain text)
+                'description:html',    // description attribute formatted as HTML
+                [                      // the owner name of the model
+                    'label' => 'Owner',
+                    'value' => 'fsf',
+                ],
+                'created_at:datetime', // creation date formatted as datetime
+            ],
+        ]);
+        die;
+    }
+    /*
+     *
+     * */
+    public function actionCeshi1(){
+        //分页类的使用
+        header("Content-type:text/html;charset=utf-8");
+        $query=PhotosSearch::find();
+        $countquery=clone $query;
+        $count=$countquery->count();
+        //echo $count;die;
+
+        /*$sort = new Sort([
+            'attributes' => [
+                'age',
+                'name' => [
+                    'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
+                    'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
+                    'default' => SORT_DESC,
+                    'label' => 'Name',
+                ],
+            ],
+        ]);*/
+
+        $page=new Pagination(['totalCount'=>$count,'pageSize'=>'1']);
+        //$page->offset
+        //var_dump($page->offset);
+        $models=$query->offset($page->offset)->limit($page->limit)->all();
+        //var_dump($list);die;
+        return $this->render('_ceshi1',[
+            'pages'=>$page,
+            'models'=>$models
+        ]);
+
+        /*$dataProvider = new ActiveDataProvider([
+            'query' => PhotosSearch::find()->where(''),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);*/
+
+    }
+
     /**
      * Lists all Content models.
      * @return mixed
@@ -64,7 +139,11 @@ class PhotosController extends BackendController
     public function actionIndex()
     {
         $searchModel = new PhotosSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->module->params['pageSize']);
+        //Yii::$app->request->queryParams相当于通过get获取
+        //var_dump(Yii::$app->request->queryParams);die;
+        //$this->module->params['pageSize']
+        $pagesize=1;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $pagesize);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
