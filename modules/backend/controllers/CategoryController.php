@@ -11,6 +11,7 @@ use app\modules\backend\models\CategorySearch;
 use app\modules\backend\components\BackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -164,6 +165,7 @@ class CategoryController extends BackendController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    //yii2表单提交
     public function actionMyform(){
         $searchModel = new CategorySearch();
         //$this->renderPartial()不使用模板布局
@@ -174,19 +176,60 @@ class CategoryController extends BackendController
         //$list=Category::find()->indexBy('id')->column();
         //var_dump($list);die;
         //echo Yii::$app->db->createCommand()->getRawSql();die;
-        $list=Category::findOne(5);
+        $list=CategorySearch::findOne(5);
 
         //echo Category::find()->createCommand()->getRawSql();die;
         //echo Json::encode($list);
         //var_dump($list);die;
-        $list=Category::findOne(5)->toArray();
+        $list=CategorySearch::findOne(5);
+        //Category::findOne(5);
         //var_dump($searchModel);die;
         return $this->render('myform',[
-            'model'=>$searchModel,
-            'list'=>$list
+            'model'=>$list,
+            //'list'=>$list
         ]);
     }
+
+
     public function actionMydata(){
-        var_dump(Yii::$app->request->post());
+        $model=new CategorySearch();
+        //$model->load(Yii::$app->request->post());
+        if(Yii::$app->request->isPost) {
+            //var_dump($_FILES['Category']);
+
+            //单个图片上传
+            /*$model->image=UploadedFile::getInstance($model,'image');
+            $ext = $model->image->extension;
+            //echo $ext;die;
+            $basedir = "uploads/photo/".date("Y-m-d").'/';
+            if(!file_exists($basedir)){
+                mkdir($basedir,0777,true);
+            }
+            $imageName = uniqid().rand(1000,9999).'.'.$ext;
+            $model->image->saveAs($basedir.$imageName);//设置图片的存储位置*/
+            //yii2文件上传多文件上传
+            $model->image=UploadedFile::getInstances($model,'image');//比单文件多一个s
+            //echo $dir;die;
+            if ($model->image && $model->validate()) {
+                foreach ($model->image as $file) {
+                    //var_dump($file->className());die;
+                    $ext = $file->extension;//
+                    //$basename=$file->baseName;文件的基本名字
+                    //echo $ext;die;
+                    $basedir = "uploads/photo/".date("Y-m-d").'/';
+                    if(!file_exists($basedir)){
+                        mkdir($basedir,0777,true);
+                    }
+                    $imageName = uniqid().rand(1000,9999).'.'.$ext;
+                    $file->saveAs($basedir.$imageName);//设置图片的存储位置
+                }
+            }
+            //var_dump($model->image);
+        }
+        //var_dump(Yii::$app->request->post());die;
+    }
+    public function actionUpload(){
+        $model=new CategorySearch();
+
     }
 }

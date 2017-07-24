@@ -97,6 +97,7 @@ class UploadedFile extends Object
     public static function getInstances($model, $attribute)
     {
         $name = Html::getInputName($model, $attribute);
+        //echo $name;
         return static::getInstancesByName($name);
     }
 

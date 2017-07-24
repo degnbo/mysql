@@ -91,7 +91,7 @@ class PhotosController extends BackendController
         die;
     }
     /*
-     *
+     *分页类
      * */
     public function actionCeshi1(){
         //分页类的使用
@@ -131,6 +131,9 @@ class PhotosController extends BackendController
         ]);*/
 
     }
+    public function actionUpload(){
+        //echo 1;
+    }
 
     /**
      * Lists all Content models.
@@ -160,7 +163,7 @@ class PhotosController extends BackendController
     {
         $model = $this->findModel($id);
         $detailModelList = PhotosDetail::find()->where(['content_id'=>$model->id])->all();
-//        print_r($detailModelList);
+        //print_r($detailModelList);
         $newPhotoDetail = new PhotosDetail();
         $newPhotoDetail->content_id = $model->id;
         return $this->render('view', [

@@ -19,11 +19,25 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['type','name'], 'required'],
-            [['id', 'pid', 'type'], 'integer'],
+            //[['type','name'], 'required'],
+            //[['id', 'pid', 'type'], 'integer'],
+            //[['image'], 'file', 'maxFiles' => 10],
             [['name', 'created_at', 'updated_at'], 'safe'],
+            //[['file'], 'file','skipOnEmpty' => false,'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png','maxFiles' => 10],
         ];
     }
+
+    /*public function behaviors()
+    {
+        //echo
+        return [
+            [
+                'class'=>UploadBehavior::className(),
+                'saveDir'=>'photos/'
+            ]
+        ];
+    }*/
+
     public static function ta()
     {
         echo 2;
