@@ -13,19 +13,25 @@ use yii\helpers\ArrayHelper;
  */
 class CategorySearch extends Category
 {
+    //为什么编写这个呢，因为数据库没有这个验证码这个字段
+    //所以添加属性之后就可以了
+    public $verifyCode;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            //[['type','name'], 'required'],
+            [['pid','id','type','name'], 'required'],
             //[['id', 'pid', 'type'], 'integer'],
             //[['image'], 'file', 'maxFiles' => 10],
-            [['name', 'created_at', 'updated_at'], 'safe'],
+            ['verifyCode','required','message'=>'验证码错误1'],
+            ['verifyCode', 'captcha'],
+            [['name', 'created_at', 'updated_at','verifyCode'], 'safe'],
             //[['file'], 'file','skipOnEmpty' => false,'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png','maxFiles' => 10],
         ];
     }
+
 
     /*public function behaviors()
     {

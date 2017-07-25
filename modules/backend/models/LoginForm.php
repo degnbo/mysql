@@ -14,6 +14,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    public $verifyCode;
     public $username;
     public $password;
     public $name;
@@ -35,6 +36,8 @@ class LoginForm extends Model
             [['username','password','name','rememberMe'],'safe'],//起一个过滤作用
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            ['verifyCode','required','message'=>'验证码错误1'],
+            ['verifyCode', 'captcha'],
         ];
     }
 

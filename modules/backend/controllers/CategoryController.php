@@ -182,6 +182,7 @@ class CategoryController extends BackendController
         //echo Json::encode($list);
         //var_dump($list);die;
         $list=CategorySearch::findOne(5);
+
         //Category::findOne(5);
         //var_dump($searchModel);die;
         return $this->render('myform',[
@@ -193,7 +194,7 @@ class CategoryController extends BackendController
 
     public function actionMydata(){
         $model=new CategorySearch();
-        //$model->load(Yii::$app->request->post());
+        var_dump(Yii::$app->request->post());die;
         if(Yii::$app->request->isPost) {
             //var_dump($_FILES['Category']);
 
@@ -231,5 +232,32 @@ class CategoryController extends BackendController
     public function actionUpload(){
         $model=new CategorySearch();
 
+    }
+    public function actions() {
+        //echo 1;die;
+        return [
+            'captcha' =>  [
+                'class' => 'yii\captcha\CaptchaAction',
+                'height' => 50,
+                'width' => 80,
+                'minLength' => 4,
+                'maxLength' => 4
+            ],
+        ];
+    }
+    public function actionYzm(){
+        $model=new CategorySearch();
+        return $this->render('verify',[
+            'model'=>$model,
+        ]);
+        /*return [
+            'captcha' =>  [
+                'class' => 'yii\captcha\CaptchaAction',
+                'height' => 50,
+                'width' => 80,
+                'minLength' => 4,
+                'maxLength' => 4
+            ],
+        ];*/
     }
 }

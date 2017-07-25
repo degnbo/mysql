@@ -16,6 +16,7 @@ use app\helpers\StringHelper;
  */
 class DefaultController extends BackendController
 {
+
     public function actions()
     {
         header('Content-type:text/html;charset=utf-8');
@@ -23,7 +24,14 @@ class DefaultController extends BackendController
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'ueditor' => $this->module->components['UEditorAction']
+            'ueditor' => $this->module->components['UEditorAction'],
+            'captcha' =>  [
+                'class' => 'yii\captcha\CaptchaAction',
+                'height' => 50,
+                'width' => 80,
+                'minLength' => 4,
+                'maxLength' => 4
+            ],
         ];
     }
     /**
