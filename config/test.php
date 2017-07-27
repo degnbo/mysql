@@ -1,13 +1,14 @@
 <?php
 $params = require(__DIR__ . '/params.php');
 $dbParams = require(__DIR__ . '/test_db.php');
-
+//echo dirname(__DIR__);die;
 /**
  * Application configuration shared by all test types
  */
 return [
     'id' => 'basic-tests',
-    'basePath' => dirname(__DIR__),    
+    //'basePath' => '@common/messages',
+    'basePath' => dirname(__DIR__),
     'language' => 'en-US',
     'components' => [
         'db' => $dbParams,

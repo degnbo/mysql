@@ -3,8 +3,10 @@
 namespace app\modules\backend\models;
 
 use app\models\Category;
+use app\modules\backend\components\AccessControl;
 use Yii;
 use yii\base\Model;
+use yii\filters\VerbFilter;
 
 /**
  * LoginForm is the model behind the login form.
@@ -36,8 +38,8 @@ class LoginForm extends Model
             [['username','password','name','rememberMe'],'safe'],//起一个过滤作用
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            ['verifyCode','required','message'=>'验证码错误1'],
-            ['verifyCode', 'captcha'],
+            //['verifyCode','required','message'=>'验证码错误1'],
+            //['verifyCode', 'captcha'],
         ];
     }
 
@@ -117,4 +119,5 @@ class LoginForm extends Model
             'rememberMe' =>'自动登录',
         ];
     }
+
 }

@@ -41,11 +41,11 @@ $fieldOptions2 = [
         <?/*= $form->field($model, 'name', $fieldOptions1)->label(false)->textInput() */?>
         <?= $form->field($model, 'password', $fieldOptions2)->label(false)->passwordInput() ?>
 
-        <?php echo $form->field($model,'verifyCode',[ 'template'  =>
+        <?php /*echo $form->field($model,'verifyCode',[ 'template'  =>
             '<div  class="row cl"><div class="formControls col-8 col-offset-3">{input}'.\yii\captcha\Captcha::widget([
                 'model' =>$model,
                 'attribute' =>'verifyCode',//模型中也要申明
-                'captchaAction' =>'login/captcha',//指定操作
+                'captchaAction' =>'default/captcha',//指定操作
                 'template'  =>'{image}',//image代表此处生成验证码图片
                 'imageOptions'   =>[
                     //以下atrribute属性，可自己扩展
@@ -55,7 +55,7 @@ $fieldOptions2 = [
                 ],
             ]).'{error}</div></div>'])->textInput(['class'  =>'input-text size-L','placeholder'    =>'验证码','style'    =>'width:150px'])
             ->label(false);
-        ?>
+        */?>
         <div class="row">
             <div class="col-xs-8">
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>

@@ -2,6 +2,8 @@
 
 namespace app\modules\backend\controllers;
 //路由
+use yii\filters\AccessControl;
+use yii\filters\AccessRule;
 use yii\helpers\url;
 use yii\helpers\Json;
 use app\modules\backend\components\BackendController;
@@ -27,6 +29,7 @@ class DefaultController extends BackendController
             'ueditor' => $this->module->components['UEditorAction'],
             'captcha' =>  [
                 'class' => 'yii\captcha\CaptchaAction',
+                //'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
                 'height' => 50,
                 'width' => 80,
                 'minLength' => 4,
@@ -148,9 +151,9 @@ class DefaultController extends BackendController
             $this->addFlash('用户不存在或者已删除');
         }
         if($model->load(Yii::$app->request->post()) && $model->saveEdit()){
-            return $this->showFlash('修改成功', 'success');
+            //return $this->showFlash('修改成功', 'success');
         }
-//        print_r($model->errors);
+        //print_r($model->errors);
         return $this->render('edit-password',[
             'model'=>$model
         ]);
@@ -174,6 +177,8 @@ class DefaultController extends BackendController
      */
     public function behaviors()
     {
+        //ob_end_flush();
+        //权限的问题
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -181,6 +186,34 @@ class DefaultController extends BackendController
                     'logout' => ['post'],
                 ],
             ],
+            /*'access' => [
+                'class' => AccessControl::className(),
+                //'actions' => ['captcha','logout', 'signup','login'],
+                //'allow' => true,
+                //'only' => ['captcha','logout', 'signup','login'],
+                'rules' => [
+                    [
+                        'actions' => ['login','captcha'],
+                        'allow' => true,
+                        //'roles' => ['?']
+                    ],
+                    //['allow' => true, 'actions' => ['login', 'auth','captcha'], 'roles' => ['?']],//没这个验证码不显示
+                   // ['allow' => true, 'actions' => ['login', 'auth', 'logout'], 'roles' => ['@']],
+                ]
+            ]*/
         ];
+    }
+
+    public function accessRules()
+    {
+        return array(
+            /*array('allow',// allow all users to perform 'index' and 'view' actions
+                'actions'=>array('captcha'),
+                'users'=>array('*'),
+            ),*/
+           /* array('deny',  // deny all users
+                'users'=>array('*'),
+            ),*/
+        );
     }
 }
