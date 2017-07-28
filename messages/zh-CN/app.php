@@ -34,4 +34,5 @@ return [
     '产品详情'=>'The product detail',
     'Is Hot'=>'The Hot product',
     'Yes'=>'fsdf',
+    'Create'=>'添加',
 ];

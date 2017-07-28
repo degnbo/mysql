@@ -41,7 +41,7 @@ class TypeSearch extends BeidouType
      */
     public function search($params)
     {
-        $query = BeidouType::find();
+        $query = BeidouType::find();//->join('left join','category');
 
         // add conditions that should always apply here
 

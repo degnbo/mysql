@@ -42,6 +42,7 @@ class BeidouType extends \yii\db\ActiveRecord
             'id' => Yii::t('app', '类型id'),
             'tname' => Yii::t('app', '类型名称'),
             'cate_id' => Yii::t('app', '栏目id'),
+            //'ff' => Yii::t('app', '栏目'),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace app\modules\backend\controllers;
 
+use app\models\Category;
 use Yii;
 use app\models\BeidouType;
 use app\modules\backend\models\TypeSearch;
@@ -35,9 +36,13 @@ class TypeController extends Controller
      */
     public function actionIndex()
     {
+        //column查询出来是一个数组
+        /*$list=Category::find()->select('name')->indexBy('id')->column();
+        var_dump($list);die;*/
+        /*$list=Category::find()->select('name,id')->indexBy('id')->asArray()->all();
+        var_dump($list);die;*/
         $searchModel = new TypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

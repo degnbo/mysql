@@ -8,14 +8,14 @@ use app\models\Category;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /** @var int $type */
 
-//$this->title = Category::getTypes()[$type].'分类管理';
-//$this->params['breadcrumbs'][] = $this->title;
+$this->title = '分类管理';
+$this->params['breadcrumbs'][] = '分类列表';
 ?>
 <div class="category-index">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><?//= Html::a('分类列表', ['index', 'type'=>$type]) ?></li>
-            <li role="presentation"><?//= Html::a('添加分类', ['create', 'type'=>$type,'name'=>'fsdf']) ?></li>
+            <li role="presentation" class="active"><?= Html::a('分类列表', ['index']) ?></li>
+            <li role="presentation"><?= Html::a('添加分类', ['create']) ?></li>
         </ul>
         <div class="tab-content">
             <?php ///echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -42,7 +42,7 @@ use app\models\Category;
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'options' => ['style' => 'width:120px'],
-                        'template' => '{update} {delete}'
+                        'template' => '{view} {update} {delete}'
                     ],
                 ],
             ]); ?>
